@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import Menu from './components/Menu';
 import Shoppingcart from './components/Shoppingcart';
 import Material from './components/pages/Material';
+import MainData from './components/pages/MainData';
 
 class App extends Component {
 
@@ -42,6 +43,7 @@ class App extends Component {
             <Switch>
               <Route path="/" component={() => (<Homepage />)} exact />
               <Route path="/ordermat" component={() => (<Material setShoppingCartState={this.setShoppingCartState} getShoppingCartState={this.getShoppingCartState} />)} exact />
+              <Route path="/stdat" component={() => (<MainData setShoppingCartState={this.setShoppingCartState} getShoppingCartState={this.getShoppingCartState} />)} exact />
               <Route component={NotFound} />
             </Switch>
           </div>

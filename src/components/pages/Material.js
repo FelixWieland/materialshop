@@ -11,7 +11,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Button, IconButton, Icon } from '@material-ui/core';
+import { Button, IconButton, Icon, CircularProgress } from '@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -20,6 +20,9 @@ const styles = theme => ({
     table: {
         backgroundColor: theme.palette.primary.main,
         boxShadow: theme.shadows[1],
+    },
+    progress: {
+        marginTop: 100,
     }
 });
 
@@ -85,7 +88,7 @@ class Material extends React.Component {
     }
 
     getMaterial = () => {
-        fetch('http://thewieland.de:10000/api/collections/get/Material?token=9f36346c45256184e69c7db5bbc761')
+        fetch('http://cockpit.cms.thewieland.de/api/collections/get/Material?token=8a8273ac322c89ff7eb77c76a3481d')
             .then(res => res.json())
             .then(res => this.splitMaterial(res.entries));
     }
@@ -153,7 +156,6 @@ class Material extends React.Component {
         const value = this.state.value;
 
         console.log(this.state);
-
         return (
             <div className={classes.root}>
                 <AppBar position="static">
@@ -175,6 +177,14 @@ class Material extends React.Component {
                     <TabContainer>
                         {this.TableTemplate(this.state.material.werkzeug, "werkzeug")}
                     </TabContainer>}
+
+                {
+                    this.state.material.werkzeug.length == 0 &&
+                    this.state.material.bekleidung.length == 0 &&
+                    this.state.material.arbeitsmaterial.length == 0 && (
+                        <CircularProgress className={classes.progress} color="secondary" />
+                    )
+                }
             </div>
         );
     }
